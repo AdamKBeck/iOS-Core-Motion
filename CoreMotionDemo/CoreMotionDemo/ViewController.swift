@@ -3,7 +3,8 @@ import CoreMotion
 
 class ViewController: UIViewController {
     // Motion manager
-    var motionManager = CMMotionManager()
+    var motion = CMMotionManager()
+    var timer = Timer()
     
     // Variables to hold data while the app is running
     var maxAccX = 0.0
@@ -31,25 +32,52 @@ class ViewController: UIViewController {
     // Functions
     override func viewDidLoad() {
         self.resetMaxValues()
-        
-        // Set motion manager properties
-        motionManager.accelerometerUpdateInterval = 0.2
-        motionManager.gyroUpdateInterval = 0.2
-        
-        // start recording data
-        motionManager.startAccelerometerUpdates(to: OperationQueue.current!, withHandler: {
-            (accelerometerData: CMAccelerometerData!, error: NSError!) -> Void in
-            self.outputAccelerationData(accelerometerData.acceleration)
-            if (error != nil) {
-                print("\(error)")
-            }
-            } as! CMAccelerometerHandler)
+        startAccelerometers()
         
         super.viewDidLoad()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func startAccelerometers() {
+        // Make sure the accelerometer hardware is available.
+        if self.motion.isAccelerometerAvailable {
+            self.motion.accelerometerUpdateInterval = 1.0 / 5.0  // 60 Hz
+            self.motion.startAccelerometerUpdates()
+            
+            // Configure a timer to fetch the data.
+            self.timer = Timer(fire: Date(), interval: (1.0/60.0),
+                               repeats: true, block: { (timer) in
+                                // Get the accelerometer data.
+                                if let data = self.motion.accelerometerData {
+                                    let x = data.acceleration.x
+                                    let y = data.acceleration.y
+                                    let z = data.acceleration.z
+                                    
+                                    self.accXLabel.text = String(x)
+                                    self.accYLabel.text = String(y)
+                                    self.accZLabel.text = String(z)
+                                    
+                                    if (x > self.maxAccX) {
+                                        self.maxAccXLabel.text = String(x)
+                                        self.maxAccX = x
+                                    }
+                                    if (y > self.maxAccY) {
+                                        self.maxAccYLabel.text = String(y)
+                                        self.maxAccY = y
+                                    }
+                                    if (z > self.maxAccY) {
+                                        self.maxAccZLabel.text = String(z)
+                                        self.maxAccZ = z
+                                    }
+                                }
+            })
+            
+            // Add the timer to the current run loop.
+            RunLoop.current.add(self.timer, forMode: .defaultRunLoopMode)
+        }
     }
     
     func outputAccelerationData(_ acceleration: CMAcceleration) {
