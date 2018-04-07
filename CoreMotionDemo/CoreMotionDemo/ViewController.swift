@@ -25,14 +25,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var rotXLabel: UILabel!
     @IBOutlet weak var rotYLabel: UILabel!
     @IBOutlet weak var rotZLabel: UILabel!
+    @IBOutlet weak var maxRotYLabel: UILabel!
     @IBOutlet weak var maxRotXLabel: UILabel!
-    @IBOutlet var maxRotYLabel: UIView!
     @IBOutlet weak var maxRotZLabel: UILabel!
     
     // Functions
     override func viewDidLoad() {
         self.resetMaxValues()
         startAccelerometers()
+        startGyros()
         
         super.viewDidLoad()
     }
@@ -74,37 +75,46 @@ class ViewController: UIViewController {
                                     }
                                 }
             })
-            
-            // Add the timer to the current run loop.
             RunLoop.current.add(self.timer, forMode: .defaultRunLoopMode)
         }
     }
     
-    func outputAccelerationData(_ acceleration: CMAcceleration) {
-        accXLabel?.text = "\(acceleration.x).2fg"
-        
-        if fabs(acceleration.x) > fabs(maxAccX) {
-            maxAccX = acceleration.x
+    func startGyros() {
+        if motion.isGyroAvailable {
+            self.motion.gyroUpdateInterval = 1.0 / 60.0
+            self.motion.startGyroUpdates()
+            
+            // Configure a timer to fetch the accelerometer data.
+            self.timer = Timer(fire: Date(), interval: (1.0/5.0),
+                               repeats: true, block: { (timer) in
+                                // Get the gyro data.
+                                if let data = self.motion.gyroData {
+                                    let x = data.rotationRate.x
+                                    let y = data.rotationRate.y
+                                    let z = data.rotationRate.z
+                                    
+                                    self.rotXLabel.text = String(x)
+                                    self.rotYLabel.text = String(y)
+                                    self.rotZLabel.text = String(z)
+                                    
+                                    if (x > self.maxRotX) {
+                                        self.maxRotXLabel.text = String(x)
+                                        self.maxRotX = x
+                                    }
+                                    if (y > self.maxRotY) {
+                                        self.maxRotYLabel.text = String(y)
+                                        self.maxRotY = y
+                                    }
+                                    if (z > self.maxRotZ) {
+                                        self.maxRotZLabel.text = String(z)
+                                        self.maxRotZ = z
+                                    }
+                                }
+            })
+            RunLoop.current.add(self.timer, forMode: .defaultRunLoopMode)
         }
-        
-//        accYLabel?.text = "\(acceleration.y).2fg"
-//
-//        if fabs(acceleration.y) > fabs(maxAccY) {
-//            maxAccX = acceleration.y
-//        }
-//
-//        accZLabel?.text = "\(acceleration.z).2fg"
-//
-//        if fabs(acceleration.z) > fabs(maxAccZ) {
-//            maxAccX = acceleration.z
-//        }
-//
-//        maxAccXLabel?.text = "\(maxAccX).2f"
-//        maxAccYLabel?.text = "\(maxAccX).2f"
-//        maxAccZLabel?.text = "\(maxAccX).2f"
     }
     
-
     @IBAction func resetMaxValues() {
         maxAccX = 0.0
         maxAccY = 0.0
@@ -113,6 +123,21 @@ class ViewController: UIViewController {
         maxRotX = 0.0
         maxRotY = 0.0
         maxRotZ = 0.0
+        
+        accXLabel.text = "0"
+        accYLabel.text = "0"
+        accZLabel.text = "0"
+        rotXLabel.text = "0"
+        rotYLabel.text = "0"
+        rotZLabel.text = "0"
+        
+        maxAccXLabel.text = "0"
+        maxAccYLabel.text = "0"
+        maxAccZLabel.text = "0"
+        maxRotXLabel.text = "0"
+        maxRotXLabel.text = "0"
+        maxRotXLabel.text = "0"
+        maxRotXLabel.text = "0"
     }
     
 }
