@@ -7,12 +7,12 @@ class ViewController: UIViewController {
     var timer = Timer()
     
     // Variables to hold data while the app is running
-    var maxAccX = 0.0
-    var maxAccY = 0.0
-    var maxAccZ = 0.0
-    var maxRotX = 0.0
-    var maxRotY = 0.0
-    var maxRotZ = 0.0
+    var maxAccX = -1
+    var maxAccY = -1
+    var maxAccZ = -1
+    var maxRotX = -1
+    var maxRotY = -1
+    var maxRotZ = -1
     
     // Outlets
     @IBOutlet weak var accXLabel: UILabel!
