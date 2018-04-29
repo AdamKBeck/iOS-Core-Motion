@@ -1,10 +1,4 @@
-//
-//  AppDelegate.swift
-//  FinalProject
-//
-//  Created by Jason Harnack on 4/27/18.
-//  Copyright © 2018 Jason Harnack. All rights reserved.
-//
+// Created by Adam Beck and Jason Harnack
 
 import UIKit
 
