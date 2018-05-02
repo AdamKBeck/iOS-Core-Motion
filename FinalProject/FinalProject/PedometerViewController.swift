@@ -7,13 +7,26 @@
 //
 
 import UIKit
+import CoreMotion
 
 class PedometerViewController: UIViewController {
 
+    @IBOutlet weak var distanceTraveled: UILabel!
+    let pedometer = CMPedometer()
+    let pedometerData = CMPedometerData()
+    let activityManager = CMMotionActivityManager()
+    var today = Date()
+    @IBOutlet weak var createNote: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let cal = Calendar.current
+        let cals = cal.dateComponents([.year, .month, .day, .hour, .minute], from: Date())
+        
+        today = cal.date(from: cals)!
+        startPedometer()
+        createNote.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +34,23 @@ class PedometerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func startPedometer(){
+        if(CMPedometer.isStepCountingAvailable()){
+            pedometer.startUpdates(from: today) { (pedometerData, error) -> Void in
+                if(error == nil){
+                    
+                }
+            }
+        }
     }
-    */
-
+    @IBAction func ZeroDistance(_ sender: Any) {
+        pedometer.stopUpdates()
+    }
+    @IBAction func BeginRecording(_ sender: Any) {
+        
+    }
+    
+    @IBAction func freezeDistance(_ sender: Any) {
+        
+    }
 }
