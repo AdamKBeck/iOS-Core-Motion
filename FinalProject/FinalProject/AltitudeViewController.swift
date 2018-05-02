@@ -51,6 +51,8 @@ class AltitudeViewController: UIViewController {
         heightLabel.text = "Height from Zero Point: \(distance)"
     }
     @IBAction func ZeroDistance(_ sender: Any) {
+        endDistance = 0
+        heightLabel.text = "Data zerored out!"
     }
     /*
     // MARK: - Navigation

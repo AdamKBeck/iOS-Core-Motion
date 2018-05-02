@@ -69,10 +69,10 @@
             </objects>
             <point key="canvasLocation" x="512.79999999999995" y="205.54722638680661"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Note View Controller-->
         <scene sceneID="1uT-Ze-Ccs">
             <objects>
-                <viewController id="fnF-Zl-Rq7" sceneMemberID="viewController">
+                <viewController id="fnF-Zl-Rq7" customClass="CreateNoteViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nor-O5-g2R">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -81,6 +81,9 @@
                                 <rect key="frame" x="152" y="560" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save Note"/>
+                                <connections>
+                                    <action selector="CreateNote:" destination="fnF-Zl-Rq7" eventType="touchUpInside" id="pXL-hT-uld"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z2W-4h-Ysf">
                                 <rect key="frame" x="108" y="318" width="159" height="30"/>
@@ -89,10 +92,21 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWf-4h-YXr">
+                                <rect key="frame" x="89" y="116" width="159" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="O1b-nO-HTO"/>
                     </view>
+                    <connections>
+                        <outlet property="DataLabel" destination="bWf-4h-YXr" id="22a-VY-pJv"/>
+                        <outlet property="noteText" destination="z2W-4h-Ysf" id="Kiq-i6-Yne"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a4G-pk-jpi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -148,6 +162,9 @@
                                 <rect key="frame" x="146" y="397" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Create Note"/>
+                                <connections>
+                                    <segue destination="fnF-Zl-Rq7" kind="show" id="ZgW-To-2Fq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
