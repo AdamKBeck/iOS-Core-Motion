@@ -2,7 +2,6 @@ import UIKit
 import CoreMotion
 
 class ViewController: UIViewController {
-    // Motion manager
     var motion = CMMotionManager()
     var timer = Timer()
     
