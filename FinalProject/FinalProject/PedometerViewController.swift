@@ -16,6 +16,8 @@ class PedometerViewController: UIViewController {
     let pedometerData = CMPedometerData()
     let activityManager = CMMotionActivityManager()
     var today = Date()
+    var startDistance = NSNumber()
+    var endDistance = NSNumber()
     @IBOutlet weak var createNote: UIButton!
     
     override func viewDidLoad() {
@@ -27,6 +29,7 @@ class PedometerViewController: UIViewController {
         today = cal.date(from: cals)!
         startPedometer()
         createNote.isHidden = true
+        distanceTraveled.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,20 +40,28 @@ class PedometerViewController: UIViewController {
     func startPedometer(){
         if(CMPedometer.isStepCountingAvailable()){
             pedometer.startUpdates(from: today) { (pedometerData, error) -> Void in
-                if(error == nil){
-                    
+                DispatchQueue.main.async {
+                    if(error != nil){
+
+                    }
                 }
+
             }
         }
     }
     @IBAction func ZeroDistance(_ sender: Any) {
         pedometer.stopUpdates()
+        startDistance = pedometerData.distance!
+        endDistance = 0
     }
     @IBAction func BeginRecording(_ sender: Any) {
-        
+        startDistance = pedometerData.distance!
+        distanceTraveled.text = "Measuring..."
     }
     
     @IBAction func freezeDistance(_ sender: Any) {
-        
+        endDistance = pedometerData.distance!
+        let distanceTravel = (endDistance as! Decimal) - (startDistance as! Decimal)
+        self.distanceTraveled.text = "Distance Traveled: \(distanceTravel)"
     }
 }
