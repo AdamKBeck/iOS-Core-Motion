@@ -26,6 +26,7 @@ class AltitudeViewController: UIViewController {
     var currentAltitude = 0.0
     
     
+    // Functions
     override func viewDidLoad() {
         super.viewDidLoad()
 

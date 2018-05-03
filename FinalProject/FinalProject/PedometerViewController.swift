@@ -4,23 +4,28 @@
 //
 //  Created by Jason Harnack on 4/27/18.
 //  Copyright © 2018 Jason Harnack. All rights reserved.
-//
-
 import UIKit
 import CoreMotion
 
 class PedometerViewController: UIViewController {
-
-
-    @IBOutlet weak var distanceTraveled: UILabel!
+    // Pedometer, Activity, and Date manager
     let pedometer = CMPedometer()
     let pedometerData = CMPedometerData()
     let activityManager = CMMotionActivityManager()
     var today = Date()
-    var startDistance = NSNumber()
-    var endDistance = NSNumber()
+    
+    // Labels
+    @IBOutlet weak var distanceTraveled: UILabel!
+    
+    // Buttons
     @IBOutlet weak var createNote: UIButton!
     
+    // Variables to store pedometer data
+    var startDistance = 0.0
+    var endDistance = 0.0
+    var currentDistance = 0.0
+    
+    // Functions
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,27 +48,38 @@ class PedometerViewController: UIViewController {
             pedometer.startUpdates(from: today) { (pedometerData, error) -> Void in
                 DispatchQueue.main.async {
                     if(error != nil){
-
+                        if let pedDist = pedometerData?.distance {
+                            self.currentDistance = (Double)(truncating: pedDist)
+                        }
+                    
+                        
                     }
                 }
-
             }
         }
     }
+    
+    
     @IBAction func ZeroDistance(_ sender: Any) {
         pedometer.stopUpdates()
-        startDistance = pedometerData.distance!
+        startDistance = 0
         endDistance = 0
+        createNote.isHidden = true
+        distanceTraveled.isHidden = true
     }
     @IBAction func BeginRecording(_ sender: Any) {
-        startDistance = pedometerData.distance!
+        startDistance = currentDistance
         distanceTraveled.text = "Measuring..."
+        distanceTraveled.isHidden = false
+        createNote.isHidden = true
     }
     
     @IBAction func freezeDistance(_ sender: Any) {
-        endDistance = pedometerData.distance!
-        let distanceTravel = (endDistance as! Decimal) - (startDistance as! Decimal)
-        self.distanceTraveled.text = "Distance Traveled: \(distanceTravel)"
+        endDistance = currentDistance
+        let distance = endDistance - startDistance
+        let stringDistance = String(distance).prefix(5)
+        self.distanceTraveled.text = "Distance Traveled:"  + stringDistance + " meters."
+        createNote.isHidden = false
     }
     
 
