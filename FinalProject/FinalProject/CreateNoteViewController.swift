@@ -11,6 +11,7 @@ import CoreData
 
 class CreateNoteViewController: UIViewController {
 
+    var identifier = ""
     @IBOutlet weak var DataLabel: UILabel!
     @IBOutlet weak var noteText: UITextField!
     lazy var persistentContainer: NSPersistentContainer = {
@@ -49,10 +50,14 @@ class CreateNoteViewController: UIViewController {
         } catch {
             print("Failed save")
         }
+        
+        
     }
     
+    @IBAction func ReturnToMeasurement(_ sender: Any) {
+    }
     
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -60,6 +65,5 @@ class CreateNoteViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }

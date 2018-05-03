@@ -11,9 +11,10 @@ import CoreData
 
 class NotesTableViewController: UITableViewController {
 
+    
     var notes = [Note]()
     var noteCells = [NoteCell]()
-    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "NotesTable")
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notes")
     lazy var persistentContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "NoteData")
