@@ -4,23 +4,41 @@
 //
 //  Created by Jason Harnack on 4/27/18.
 //  Copyright © 2018 Jason Harnack. All rights reserved.
-//
-
 import UIKit
 import CoreMotion
 
 class PedometerViewController: UIViewController {
-
-
-    @IBOutlet weak var distanceTraveled: UILabel!
+    // Pedometer, Activity, and Date manager
     let pedometer = CMPedometer()
     let pedometerData = CMPedometerData()
     let activityManager = CMMotionActivityManager()
     var today = Date()
-    var startDistance = NSNumber()
-    var endDistance = NSNumber()
+    
+    // Labels
+    @IBOutlet weak var distanceTraveled: UILabel!
+    
+    // Buttons
     @IBOutlet weak var createNote: UIButton!
     
+    // Variables to store pedometer data
+    var startDistance: Double! = 0.0
+    var endDistance: Double! = 0.0
+    var distance: Double! = 0.0
+    
+    // Timers
+    var timer = Timer()
+    var timerInterval = 1.0
+    var timeElapsed:TimeInterval = 1.0
+    
+    func displayPedometerData() {
+        // empty
+    }
+    
+    @objc func timerAction(timer:Timer){
+        displayPedometerData()
+    }
+    
+    // Functions
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,32 +56,45 @@ class PedometerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func startPedometer(){
-        if(CMPedometer.isStepCountingAvailable()){
-            pedometer.startUpdates(from: today) { (pedometerData, error) -> Void in
-                DispatchQueue.main.async {
-                    if(error != nil){
-
-                    }
-                }
-
-            }
-        }
+    func startTimer(){
+        if timer.isValid { timer.invalidate() }
+        timer = Timer.scheduledTimer(timeInterval: timerInterval,target: self,selector: #selector(timerAction(timer:)) ,userInfo: nil,repeats: true)
     }
+    
+    func startPedometer(){
+        startTimer()
+        
+        pedometer.startUpdates(from: Date(), withHandler: { (pedometerData, error) in
+            if let pedData = pedometerData{
+                if let dist = pedData.distance{
+                    self.distance = Double(truncating: dist)
+                }
+            }
+        })
+    }
+    
+    
     @IBAction func ZeroDistance(_ sender: Any) {
         pedometer.stopUpdates()
-        startDistance = pedometerData.distance!
+        startDistance = 0
         endDistance = 0
+        createNote.isHidden = true
+        distanceTraveled.isHidden = true
     }
+    
     @IBAction func BeginRecording(_ sender: Any) {
-        startDistance = pedometerData.distance!
+        startDistance = distance
         distanceTraveled.text = "Measuring..."
+        distanceTraveled.isHidden = false
+        createNote.isHidden = true
     }
     
     @IBAction func freezeDistance(_ sender: Any) {
-        endDistance = pedometerData.distance!
-        let distanceTravel = (endDistance as! Decimal) - (startDistance as! Decimal)
-        self.distanceTraveled.text = "Distance Traveled: \(distanceTravel)"
+        endDistance = self.distance
+        let distance = endDistance - startDistance
+        let stringDistance = String(distance).prefix(5)
+        self.distanceTraveled.text = "Distance Traveled: "  + stringDistance + " meters."
+        createNote.isHidden = false
     }
     
 

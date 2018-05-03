@@ -26,6 +26,7 @@ class AltitudeViewController: UIViewController {
     var currentAltitude = 0.0
     
     
+    // Functions
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,7 +61,8 @@ class AltitudeViewController: UIViewController {
     @IBAction func FreezeData(_ sender: Any) {
         endDistance = currentAltitude
         let distance = endDistance - startDistance
-        heightLabel.text = "Height from Zero Point: \(distance)"
+        let stringDistance = String(distance).prefix(5)
+        heightLabel.text = "Height from Zero Point: " + stringDistance + " meters."
         createNote.isHidden = false
     }
     @IBAction func ZeroDistance(_ sender: Any) {
