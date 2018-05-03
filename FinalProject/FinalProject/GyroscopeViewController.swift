@@ -26,6 +26,7 @@ class GyroscopeViewController: UIViewController {
     
     // Labels
     @IBOutlet weak var angleXLabel: UILabel!
+    @IBOutlet weak var counterAngleXLabel: UILabel!
     @IBOutlet weak var currentAngleXLabel: UILabel!
     @IBOutlet weak var beginLabel: UILabel!
     @IBOutlet weak var endLabel: UILabel!
@@ -61,7 +62,7 @@ class GyroscopeViewController: UIViewController {
                     // Convert the degrees to output how a unit circle displays angles.
                     rotation = 360 - (rotation * -1)
                     
-                    self.currentAngleXLabel.text = String(rotation)
+                    self.currentAngleXLabel.text = String(String(rotation).prefix(5))
                     self.currentAngleX = String(rotation)
                 }
             }
@@ -73,7 +74,7 @@ class GyroscopeViewController: UIViewController {
     // Take a current measurement as a starting value.
     @IBAction func startRecording(_ sender: UIButton) {
         beginAngleX = currentAngleX
-        beginLabel.text = beginAngleX
+        beginLabel.text = String(beginAngleX.prefix(5))
         beginButton.isEnabled = false
         freezeButton.isEnabled = true
     }
@@ -81,11 +82,18 @@ class GyroscopeViewController: UIViewController {
     // Take a current measurement as an ending value, and displays the difference.
     @IBAction func stopRecording(_ sender: UIButton) {
         endAngleX = currentAngleX
-        endLabel.text = currentAngleX
+        endLabel.text = String(currentAngleX.prefix(5))
         
         // display the difference
-        let diff = Double(endLabel.text!)! - Double(beginLabel.text!)!
-        angleXLabel.text = String(diff)
+        let end = Double(endLabel.text!)!
+        let begin = Double(beginLabel.text!)!
+        
+        let clockwiseDiff = begin + (360 - end)
+        let counterclockwiseDiff = end - begin
+        
+        angleXLabel.text = String(String(clockwiseDiff).prefix(5))
+        counterAngleXLabel.text = String(String(counterclockwiseDiff).prefix(5))
+        
         freezeButton.isEnabled = false
     }
     
@@ -95,6 +103,7 @@ class GyroscopeViewController: UIViewController {
         freezeButton.isEnabled = false
         
         angleXLabel.text = "0"
+        counterAngleXLabel.text = "0"
         currentAngleXLabel.text = "0"
         beginLabel.text = "0"
         endLabel.text = "0"
