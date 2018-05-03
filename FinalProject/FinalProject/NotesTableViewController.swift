@@ -7,12 +7,27 @@
 //
 
 import UIKit
+import CoreData
 
 class NotesTableViewController: UITableViewController {
 
     var notes = [Note]()
     var noteCells = [NoteCell]()
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: "NotesTable")
+    lazy var persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "NoteData")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error {
+                
+                fatalError("Unresolved error \(error)")
+            }
+        })
+        return container
+    }()
+    lazy var context = persistentContainer.viewContext
+    lazy var entity = NSEntityDescription.entity(forEntityName: "Notes", in: context)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,16 +35,19 @@ class NotesTableViewController: UITableViewController {
         do {
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject] {
-                notes.Append(Note(noteText: data.value(forKey: "NoteText") as! String, 
-                                  noteDate: data.value(forKey: "NoteDate") as! Date,
-                                  noteData: data.value(forKey: "NoteData") as! String))
+                notes.append(Note(NoteText: data.value(forKey: "noteText") as! String,
+                                  NoteDate: data.value(forKey: "noteDate") as! Date,
+                                  NoteData: data.value(forKey: "noteData") as! String))
+            }
+        } catch {
+                print("Failed")
             }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
+        }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

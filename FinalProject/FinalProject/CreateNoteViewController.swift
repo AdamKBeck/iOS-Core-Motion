@@ -7,14 +7,25 @@
 //
 
 import UIKit
+import CoreData
 
 class CreateNoteViewController: UIViewController {
 
     @IBOutlet weak var DataLabel: UILabel!
     @IBOutlet weak var noteText: UITextField!
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    let context = appDelegate.persistentContainer.viewContext
-    let entity = NSEntityDescription.entity(forEntityName: "Notes", in: context)
+    lazy var persistentContainer: NSPersistentContainer = {
+        
+        let container = NSPersistentContainer(name: "NoteData")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error {
+                
+                fatalError("Unresolved error \(error)")
+            }
+        })
+        return container
+    }()
+    lazy var context = persistentContainer.viewContext
+    lazy var entity = NSEntityDescription.entity(forEntityName: "Notes", in: context)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +40,9 @@ class CreateNoteViewController: UIViewController {
     
     @IBAction func CreateNote(_ sender: Any) {
             let newNote = NSManagedObject(entity: entity!, insertInto: context)
-            newNote.setValue(noteText.text!, forKey: "NoteText")
-            newNote.setValue(Date(), forKey: "NoteDate")
-            newNote.setValue(data, forKey: "NoteData")
+            newNote.setValue(noteText.text!, forKey: "noteText")
+            newNote.setValue(Date(), forKey: "noteDate")
+            newNote.setValue("test", forKey: "noteData")
         
         do {
             try context.save()

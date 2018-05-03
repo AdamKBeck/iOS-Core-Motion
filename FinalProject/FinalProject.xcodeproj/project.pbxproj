@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A6D2FFA209B8D98003F8DED /* NoteData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D2FF8209B8D98003F8DED /* NoteData.xcdatamodeld */; };
+		5A6D2FFC209B8E64003F8DED /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D2FFB209B8E64003F8DED /* Note.swift */; };
 		5A7154B4209A6A34000FF904 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7154B3209A6A34000FF904 /* NotesTableViewController.swift */; };
 		5A7154B6209A6A56000FF904 /* CreateNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7154B5209A6A56000FF904 /* CreateNoteViewController.swift */; };
 		5A96FB842093884100A202EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A96FB832093884100A202EF /* AppDelegate.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5A6D2FF9209B8D98003F8DED /* NoteData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteData.xcdatamodel; sourceTree = "<group>"; };
+		5A6D2FFB209B8E64003F8DED /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		5A7154B3209A6A34000FF904 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		5A7154B5209A6A56000FF904 /* CreateNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNoteViewController.swift; sourceTree = "<group>"; };
 		5A96FB802093884100A202EF /* FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,11 +117,13 @@
 				5A96FB8A2093884200A202EF /* Assets.xcassets */,
 				5A96FB8C2093884200A202EF /* LaunchScreen.storyboard */,
 				5A96FB8F2093884200A202EF /* Info.plist */,
+				5A6D2FFB209B8E64003F8DED /* Note.swift */,
 				5A96FBB120938C4E00A202EF /* PedometerViewController.swift */,
 				5A96FBB320938C6700A202EF /* AltitudeViewController.swift */,
 				5A96FBB520938C7700A202EF /* GyroscopeViewController.swift */,
 				5A7154B3209A6A34000FF904 /* NotesTableViewController.swift */,
 				5A7154B5209A6A56000FF904 /* CreateNoteViewController.swift */,
+				5A6D2FF8209B8D98003F8DED /* NoteData.xcdatamodeld */,
 			);
 			path = FinalProject;
 			sourceTree = "<group>";
@@ -279,6 +285,8 @@
 				5A96FBB620938C7700A202EF /* GyroscopeViewController.swift in Sources */,
 				5A96FBB420938C6700A202EF /* AltitudeViewController.swift in Sources */,
 				5A96FB842093884100A202EF /* AppDelegate.swift in Sources */,
+				5A6D2FFC209B8E64003F8DED /* Note.swift in Sources */,
+				5A6D2FFA209B8D98003F8DED /* NoteData.xcdatamodeld in Sources */,
 				5A7154B6209A6A56000FF904 /* CreateNoteViewController.swift in Sources */,
 				5A7154B4209A6A34000FF904 /* NotesTableViewController.swift in Sources */,
 			);
@@ -582,6 +590,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5A6D2FF8209B8D98003F8DED /* NoteData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5A6D2FF9209B8D98003F8DED /* NoteData.xcdatamodel */,
+			);
+			currentVersion = 5A6D2FF9209B8D98003F8DED /* NoteData.xcdatamodel */;
+			path = NoteData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5A96FB782093884100A202EF /* Project object */;
 }
