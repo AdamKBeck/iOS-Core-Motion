@@ -10,13 +10,22 @@ import UIKit
 import CoreMotion
 
 class AltitudeViewController: UIViewController {
-
-    @IBOutlet weak var createNote: UIButton!
-    @IBOutlet weak var heightLabel: UILabel!
+    // Altitude manager
     let altitude = CMAltimeter()
     let altitudeData = CMAltitudeData()
-    var startDistance = NSNumber()
-    var endDistance = NSNumber()
+    
+    // Buttons
+    @IBOutlet weak var createNote: UIButton!
+    
+    // Labels
+    @IBOutlet weak var heightLabel: UILabel!
+    
+    // Variables to store altitude data
+    var startDistance = 0.0
+    var endDistance = 0.0
+    var currentAltitude = 0.0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,7 +44,7 @@ class AltitudeViewController: UIViewController {
             altitude.startRelativeAltitudeUpdates(to: OperationQueue.main) {
                 (altitudeData, error) in
                 if(error == nil){
-                    
+                    self.currentAltitude = (Double)(truncating: (altitudeData?.relativeAltitude)!)
                 }
                 
             }
@@ -43,19 +52,19 @@ class AltitudeViewController: UIViewController {
     }
     
     @IBAction func BeginRecording(_ sender: Any) {
-        startDistance = altitudeData.relativeAltitude
+        startDistance = currentAltitude
         heightLabel.text = "Measuring..."
         createNote.isHidden = true
     }
     
     @IBAction func FreezeData(_ sender: Any) {
-        endDistance = altitudeData.relativeAltitude
-        let distance = (endDistance as! Decimal) - (startDistance as! Decimal)
+        endDistance = currentAltitude
+        let distance = endDistance - startDistance
         heightLabel.text = "Height from Zero Point: \(distance)"
         createNote.isHidden = false
     }
     @IBAction func ZeroDistance(_ sender: Any) {
-        endDistance = 0
+        endDistance = 0.0
         heightLabel.text = "Data zerored out!"
         createNote.isHidden = true
     }
