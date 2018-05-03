@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--Height-->
         <scene sceneID="pT0-qQ-hDX">
             <objects>
-                <viewController id="Beh-fe-Zby" customClass="AltitudeViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Height" id="Beh-fe-Zby" customClass="AltitudeViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="df5-Le-b01">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,7 +68,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="S1e-1E-DdP"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="aFH-ay-5JR"/>
+                    <tabBarItem key="tabBarItem" title="Height" id="aFH-ay-5JR"/>
                     <connections>
                         <outlet property="heightLabel" destination="6G0-JS-WYx" id="xHf-df-jHG"/>
                     </connections>
@@ -136,10 +136,10 @@
             </objects>
             <point key="canvasLocation" x="1652" y="-862"/>
         </scene>
-        <!--Item-->
+        <!--Distance-->
         <scene sceneID="Nue-eG-GXl">
             <objects>
-                <viewController id="bdG-yU-Gdt" customClass="PedometerViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Distance" id="bdG-yU-Gdt" customClass="PedometerViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ubq-p3-6ou">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,7 +194,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="do5-U2-C91"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="yMz-Xs-Vkg"/>
+                    <tabBarItem key="tabBarItem" title="Distance" id="yMz-Xs-Vkg"/>
                     <connections>
                         <outlet property="createNote" destination="hwF-fL-oOW" id="hA7-NI-O6K"/>
                         <outlet property="distanceTraveled" destination="LYO-QU-sUz" id="ypI-4E-4XX"/>
@@ -204,10 +204,10 @@
             </objects>
             <point key="canvasLocation" x="38" y="-1284"/>
         </scene>
-        <!--Item-->
+        <!--Notes-->
         <scene sceneID="FRV-X3-Sbd">
             <objects>
-                <tableViewController id="nD4-ci-cVA" customClass="NotesTableViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Notes" id="nD4-ci-cVA" customClass="NotesTableViewController" customModule="FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="N3h-Mj-nDB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -227,7 +227,7 @@
                             <outlet property="delegate" destination="nD4-ci-cVA" id="7kM-dI-pZj"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="IoV-pe-eiu"/>
+                    <tabBarItem key="tabBarItem" title="Notes" id="IoV-pe-eiu"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nnh-gj-q22" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -378,6 +378,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VEr-G1-q1e"/>
+        <segue reference="ZgW-To-2Fq"/>
     </inferredMetricsTieBreakers>
 </document>

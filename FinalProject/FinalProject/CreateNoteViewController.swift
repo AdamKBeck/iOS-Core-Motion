@@ -12,6 +12,7 @@ import CoreData
 class CreateNoteViewController: UIViewController {
 
     var identifier = ""
+    var labelText = ""
     @IBOutlet weak var DataLabel: UILabel!
     @IBOutlet weak var noteText: UITextField!
     lazy var persistentContainer: NSPersistentContainer = {
@@ -30,7 +31,7 @@ class CreateNoteViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        DataLabel.text = labelText
         // Do any additional setup after loading the view.
     }
 
@@ -43,7 +44,7 @@ class CreateNoteViewController: UIViewController {
             let newNote = NSManagedObject(entity: entity!, insertInto: context)
             newNote.setValue(noteText.text!, forKey: "noteText")
             newNote.setValue(Date(), forKey: "noteDate")
-            newNote.setValue("test", forKey: "noteData")
+            newNote.setValue(DataLabel.text!, forKey: "noteData")
         
         do {
             try context.save()
@@ -51,13 +52,13 @@ class CreateNoteViewController: UIViewController {
             print("Failed save")
         }
         
-        
+        _ = navigationController?.popViewController(animated: true)
     }
     
     @IBAction func ReturnToMeasurement(_ sender: Any) {
     }
     
-
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -65,5 +66,5 @@ class CreateNoteViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-
+    */
 }
