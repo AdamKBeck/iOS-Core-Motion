@@ -95,7 +95,7 @@ class GyroscopeViewController: UIViewController {
         let counterclockwiseDiff = end - begin
         
         angleXLabel.text = String(String(clockwiseDiff).prefix(5))
-        counterAngleXLabel.text = String(String(counterclockwiseDiff).prefix(5))
+        counterAngleXLabel.text = String((String(counterclockwiseDiff)).prefix(5))
         
         freezeButton.isEnabled = false
         createNote.isHidden = false

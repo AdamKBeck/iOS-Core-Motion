@@ -360,6 +360,7 @@
                         <outlet property="angleXLabel" destination="4Xx-dn-MvE" id="j2e-qT-t7H"/>
                         <outlet property="beginButton" destination="679-cE-oV6" id="62J-Oh-6NP"/>
                         <outlet property="beginLabel" destination="ftc-kT-aoH" id="7uT-cV-CCn"/>
+                        <outlet property="counterAngleXLabel" destination="Obv-10-FKe" id="ra2-ZS-Cor"/>
                         <outlet property="createNote" destination="uwh-Ko-4c3" id="zHT-EJ-FXX"/>
                         <outlet property="currentAngleXLabel" destination="lIj-74-wd6" id="5tD-cd-C2x"/>
                         <outlet property="endLabel" destination="wIe-OU-QSX" id="o3C-Nb-oR7"/>
