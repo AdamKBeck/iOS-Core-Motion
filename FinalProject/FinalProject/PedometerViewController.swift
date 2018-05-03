@@ -21,9 +21,22 @@ class PedometerViewController: UIViewController {
     @IBOutlet weak var createNote: UIButton!
     
     // Variables to store pedometer data
-    var startDistance = 0.0
-    var endDistance = 0.0
-    var currentDistance = 0.0
+    var startDistance: Double! = 0.0
+    var endDistance: Double! = 0.0
+    var distance: Double! = 0.0
+    
+    // Timers
+    var timer = Timer()
+    var timerInterval = 1.0
+    var timeElapsed:TimeInterval = 1.0
+    
+    func displayPedometerData() {
+        // empty
+    }
+    
+    @objc func timerAction(timer:Timer){
+        displayPedometerData()
+    }
     
     // Functions
     override func viewDidLoad() {
@@ -43,20 +56,21 @@ class PedometerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func startTimer(){
+        if timer.isValid { timer.invalidate() }
+        timer = Timer.scheduledTimer(timeInterval: timerInterval,target: self,selector: #selector(timerAction(timer:)) ,userInfo: nil,repeats: true)
+    }
+    
     func startPedometer(){
-        if(CMPedometer.isStepCountingAvailable()){
-            pedometer.startUpdates(from: today) { (pedometerData, error) -> Void in
-                DispatchQueue.main.async {
-                    if(error != nil){
-                        if let pedDist = pedometerData?.distance {
-                            self.currentDistance = (Double)(truncating: pedDist)
-                        }
-                    
-                        
-                    }
+        startTimer()
+        
+        pedometer.startUpdates(from: Date(), withHandler: { (pedometerData, error) in
+            if let pedData = pedometerData{
+                if let dist = pedData.distance{
+                    self.distance = Double(truncating: dist)
                 }
             }
-        }
+        })
     }
     
     
@@ -67,15 +81,16 @@ class PedometerViewController: UIViewController {
         createNote.isHidden = true
         distanceTraveled.isHidden = true
     }
+    
     @IBAction func BeginRecording(_ sender: Any) {
-        startDistance = currentDistance
+        startDistance = distance
         distanceTraveled.text = "Measuring..."
         distanceTraveled.isHidden = false
         createNote.isHidden = true
     }
     
     @IBAction func freezeDistance(_ sender: Any) {
-        endDistance = currentDistance
+        endDistance = self.distance
         let distance = endDistance - startDistance
         let stringDistance = String(distance).prefix(5)
         self.distanceTraveled.text = "Distance Traveled:"  + stringDistance + " meters."
