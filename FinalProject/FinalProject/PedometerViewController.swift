@@ -11,6 +11,7 @@ import CoreMotion
 
 class PedometerViewController: UIViewController {
 
+
     @IBOutlet weak var distanceTraveled: UILabel!
     let pedometer = CMPedometer()
     let pedometerData = CMPedometerData()

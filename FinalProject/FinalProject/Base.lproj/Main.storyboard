@@ -70,6 +70,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Height" id="aFH-ay-5JR"/>
                     <connections>
+                        <outlet property="createNote" destination="P0A-2p-Zad" id="7N1-zB-lxh"/>
                         <outlet property="heightLabel" destination="6G0-JS-WYx" id="xHf-df-jHG"/>
                     </connections>
                 </viewController>
@@ -196,7 +197,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Distance" id="yMz-Xs-Vkg"/>
                     <connections>
-                        <outlet property="createNote" destination="hwF-fL-oOW" id="hA7-NI-O6K"/>
+                        <outlet property="createNote" destination="hwF-fL-oOW" id="bGI-an-XeN"/>
                         <outlet property="distanceTraveled" destination="LYO-QU-sUz" id="ypI-4E-4XX"/>
                     </connections>
                 </viewController>
@@ -345,6 +346,7 @@
                         <outlet property="angleXLabel" destination="4Xx-dn-MvE" id="j2e-qT-t7H"/>
                         <outlet property="beginButton" destination="679-cE-oV6" id="62J-Oh-6NP"/>
                         <outlet property="beginLabel" destination="ftc-kT-aoH" id="7uT-cV-CCn"/>
+                        <outlet property="createNote" destination="uwh-Ko-4c3" id="zHT-EJ-FXX"/>
                         <outlet property="currentAngleXLabel" destination="lIj-74-wd6" id="5tD-cd-C2x"/>
                         <outlet property="endLabel" destination="wIe-OU-QSX" id="o3C-Nb-oR7"/>
                         <outlet property="freezeButton" destination="CmM-3o-Nnr" id="oPA-x2-bit"/>
@@ -378,6 +380,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZgW-To-2Fq"/>
+        <segue reference="46D-XF-e8t"/>
     </inferredMetricsTieBreakers>
 </document>

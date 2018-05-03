@@ -13,6 +13,7 @@ class GyroscopeViewController: UIViewController {
     var motion = CMMotionManager()
     var timer = Timer()
     
+    @IBOutlet weak var createNote: UIButton!
     // Variables to hold data while the app is running
     var currentAngleX = "-1.0"
     var beginAngleX = "-1.0"
@@ -35,6 +36,7 @@ class GyroscopeViewController: UIViewController {
         freezeButton.isEnabled = false
         startGyros()
         super.viewDidLoad()
+        createNote.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,6 +78,7 @@ class GyroscopeViewController: UIViewController {
         beginLabel.text = beginAngleX
         beginButton.isEnabled = false
         freezeButton.isEnabled = true
+        createNote.isHidden = true
     }
     
     // Take a current measurement as an ending value, and displays the difference.
@@ -87,6 +90,7 @@ class GyroscopeViewController: UIViewController {
         let diff = Double(endLabel.text!)! - Double(beginLabel.text!)!
         angleXLabel.text = String(diff)
         freezeButton.isEnabled = false
+        createNote.isHidden = false
     }
     
     // Clears the displayed value.
@@ -98,6 +102,7 @@ class GyroscopeViewController: UIViewController {
         currentAngleXLabel.text = "0"
         beginLabel.text = "0"
         endLabel.text = "0"
+        createNote.isHidden = true
     }
     
    

@@ -11,6 +11,7 @@ import CoreMotion
 
 class AltitudeViewController: UIViewController {
 
+    @IBOutlet weak var createNote: UIButton!
     @IBOutlet weak var heightLabel: UILabel!
     let altitude = CMAltimeter()
     let altitudeData = CMAltitudeData()
@@ -20,6 +21,7 @@ class AltitudeViewController: UIViewController {
         super.viewDidLoad()
 
         startAltimeter()
+        createNote.isHidden = true
         // Do any additional setup after loading the view.
     }
 
@@ -43,16 +45,19 @@ class AltitudeViewController: UIViewController {
     @IBAction func BeginRecording(_ sender: Any) {
         startDistance = altitudeData.relativeAltitude
         heightLabel.text = "Measuring..."
+        createNote.isHidden = true
     }
     
     @IBAction func FreezeData(_ sender: Any) {
         endDistance = altitudeData.relativeAltitude
         let distance = (endDistance as! Decimal) - (startDistance as! Decimal)
         heightLabel.text = "Height from Zero Point: \(distance)"
+        createNote.isHidden = false
     }
     @IBAction func ZeroDistance(_ sender: Any) {
         endDistance = 0
         heightLabel.text = "Data zerored out!"
+        createNote.isHidden = true
     }
 
     // MARK: - Navigation
