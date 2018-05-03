@@ -62,14 +62,20 @@ class NotesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return notes.count
+        if(notes.count != 0){
+            return notes.count
+        }
+        else {
+            return noteCells.count
+        }
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        for current in notes {
+        if(notes.count > 0) {
+            var current = notes.removeFirst()
             cell.textLabel?.text = current.noteText
             
             noteCells.append(NoteCell(noteData: current.noteData, noteText: current.noteText, noteDate: current.noteDate, cell: cell))
@@ -95,7 +101,9 @@ class NotesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            let note = notes.remove(at: indexPath.row)
+            let note = noteCells.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
             let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
             fetchRequest.predicate = NSPredicate.init(format: "noteDate == %@", note.noteDate as CVarArg)
             do {
@@ -110,7 +118,7 @@ class NotesTableViewController: UITableViewController {
                     }
                 }
             } 
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
