@@ -91,8 +91,22 @@ class GyroscopeViewController: UIViewController {
         let end = Double(endLabel.text!)!
         let begin = Double(beginLabel.text!)!
         
-        let clockwiseDiff = begin + (360 - end)
-        let counterclockwiseDiff = end - begin
+        // There's two different types of cases for displaying clockwise
+        // and counterclockwise angles correctly
+        var clockwiseDiff = 0.0
+        var counterclockwiseDiff = 0.0
+        
+        if (begin < end) {
+            clockwiseDiff = 360 - (end - begin)
+            counterclockwiseDiff = end - begin
+        }
+        else {
+            clockwiseDiff = end - begin
+            counterclockwiseDiff = 360 - (end - begin)
+        }
+        
+//        let clockwiseDiff = begin + (360 - end)
+//        let counterclockwiseDiff = end - begin
         
         angleXLabel.text = String(String(clockwiseDiff).prefix(5))
         counterAngleXLabel.text = String((String(counterclockwiseDiff)).prefix(5))
