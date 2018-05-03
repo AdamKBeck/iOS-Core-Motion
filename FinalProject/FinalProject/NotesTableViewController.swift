@@ -80,7 +80,7 @@ class NotesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         if(notes.count > 0) {
-            var current = notes.removeFirst()
+            let current = notes.removeFirst()
             cell.textLabel?.text = current.noteText
             
             noteCells.append(NoteCell(noteData: current.noteData, noteText: current.noteText, noteDate: current.noteDate, cell: cell))

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UND-YX-aeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UND-YX-aeg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -70,8 +70,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Height" id="aFH-ay-5JR"/>
                     <connections>
+                        <outlet property="beginButton" destination="NTg-Mc-pKG" id="IST-13-eNO"/>
                         <outlet property="createNote" destination="P0A-2p-Zad" id="7N1-zB-lxh"/>
+                        <outlet property="freezeButton" destination="9R1-Wx-48k" id="p1Y-5e-Xg6"/>
                         <outlet property="heightLabel" destination="6G0-JS-WYx" id="xHf-df-jHG"/>
+                        <outlet property="resetButton" destination="m7y-cb-rAC" id="a3c-gY-e8p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Flg-fd-WMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -245,6 +248,9 @@
                     <connections>
                         <outlet property="createNote" destination="hwF-fL-oOW" id="bGI-an-XeN"/>
                         <outlet property="distanceTraveled" destination="LYO-QU-sUz" id="ypI-4E-4XX"/>
+                        <outlet property="endButton" destination="hZF-eQ-bOy" id="57y-tD-v6C"/>
+                        <outlet property="startButton" destination="aG8-Uq-vN5" id="Mzl-X2-PR4"/>
+                        <outlet property="zeroButton" destination="vrX-sD-h5L" id="ojY-hr-CQL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ca-gM-9fs" userLabel="First Responder" sceneMemberID="firstResponder"/>

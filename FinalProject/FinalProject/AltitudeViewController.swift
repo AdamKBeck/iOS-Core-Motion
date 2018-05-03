@@ -17,6 +17,10 @@ class AltitudeViewController: UIViewController {
     // Buttons
     @IBOutlet weak var createNote: UIButton!
     
+    @IBOutlet weak var beginButton: UIButton!
+    @IBOutlet weak var freezeButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
+    
     // Labels
     @IBOutlet weak var heightLabel: UILabel!
     
@@ -29,7 +33,7 @@ class AltitudeViewController: UIViewController {
     // Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        freezeButton.isEnabled = false
         startAltimeter()
         createNote.isHidden = true
         // Do any additional setup after loading the view.
@@ -56,6 +60,8 @@ class AltitudeViewController: UIViewController {
         startDistance = currentAltitude
         heightLabel.text = "Measuring..."
         createNote.isHidden = true
+        beginButton.isEnabled = false
+        freezeButton.isEnabled = true
     }
     
     @IBAction func FreezeData(_ sender: Any) {
@@ -64,11 +70,14 @@ class AltitudeViewController: UIViewController {
         let stringDistance = String(distance).prefix(5)
         heightLabel.text = "Height from Zero Point: " + stringDistance + " meters."
         createNote.isHidden = false
+        freezeButton.isEnabled = false
     }
     @IBAction func ZeroDistance(_ sender: Any) {
         endDistance = 0.0
         heightLabel.text = "Data zerored out!"
         createNote.isHidden = true
+        beginButton.isEnabled = true
+        freezeButton.isEnabled = false
     }
 
     // MARK: - Navigation
