@@ -93,7 +93,7 @@ class PedometerViewController: UIViewController {
         endDistance = self.distance
         let distance = endDistance - startDistance
         let stringDistance = String(distance).prefix(5)
-        self.distanceTraveled.text = "Distance Traveled:"  + stringDistance + " meters."
+        self.distanceTraveled.text = "Distance Traveled: "  + stringDistance + " meters."
         createNote.isHidden = false
     }
     
