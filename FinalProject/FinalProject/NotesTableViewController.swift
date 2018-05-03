@@ -11,7 +11,7 @@ import CoreData
 
 class NotesTableViewController: UITableViewController {
 
-    
+    var identifier = ""
     var notes = [NoteCell]()
     var noteCells = [NoteCell]()
     let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
@@ -28,6 +28,11 @@ class NotesTableViewController: UITableViewController {
     }()
     lazy var context = persistentContainer.viewContext
     lazy var entity = NSEntityDescription.entity(forEntityName: "Note", in: context)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewDidLoad()
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -140,25 +145,40 @@ class NotesTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        var dest = segue.destination as! IndividualNoteViewController
+        
+        if(sender is UITableViewCell){
+            for cell in noteCells{
+                if(sender as! UITableViewCell == cell.cell){
+                    dest.note.noteData = cell.noteData
+                    dest.note.noteText = cell.noteText
+                    dest.note.noteDate = cell.noteDate
+                }
+            }
+        }
     }
-    */
+
 
 }
         
 class NoteCell{
-    let noteData: String
-    let noteText: String
-    let noteDate: Date
-    let cell: UITableViewCell
+    var noteData = String()
+    var noteText = String()
+    var noteDate = Date()
+    var cell = UITableViewCell()
     
-    init(noteData: String, noteText: String, noteDate: Date, cell: UITableViewCell){
+    public init() {
+        
+    }
+    
+    public init(noteData: String, noteText: String, noteDate: Date, cell: UITableViewCell){
         self.noteData = noteData
         self.noteDate = noteDate
         self.noteText = noteText
