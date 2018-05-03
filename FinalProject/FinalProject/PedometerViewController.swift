@@ -19,6 +19,9 @@ class PedometerViewController: UIViewController {
     
     // Buttons
     @IBOutlet weak var createNote: UIButton!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var endButton: UIButton!
+    @IBOutlet weak var zeroButton: UIButton!
     
     // Variables to store pedometer data
     var startDistance: Double! = 0.0
@@ -49,6 +52,8 @@ class PedometerViewController: UIViewController {
         startPedometer()
         createNote.isHidden = true
         distanceTraveled.isHidden = true
+        
+        endButton.isEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,6 +76,7 @@ class PedometerViewController: UIViewController {
                 }
             }
         })
+        
     }
     
     
@@ -80,6 +86,9 @@ class PedometerViewController: UIViewController {
         endDistance = 0
         createNote.isHidden = true
         distanceTraveled.isHidden = true
+        
+        startButton.isEnabled = true
+        endButton.isEnabled = false
     }
     
     @IBAction func BeginRecording(_ sender: Any) {
@@ -87,6 +96,9 @@ class PedometerViewController: UIViewController {
         distanceTraveled.text = "Measuring..."
         distanceTraveled.isHidden = false
         createNote.isHidden = true
+        
+        startButton.isEnabled = false
+        endButton.isEnabled = true
     }
     
     @IBAction func freezeDistance(_ sender: Any) {
@@ -95,6 +107,8 @@ class PedometerViewController: UIViewController {
         let stringDistance = String(distance).prefix(5)
         self.distanceTraveled.text = "Distance Traveled: "  + stringDistance + " meters."
         createNote.isHidden = false
+        
+        endButton.isEnabled = false
     }
     
 
