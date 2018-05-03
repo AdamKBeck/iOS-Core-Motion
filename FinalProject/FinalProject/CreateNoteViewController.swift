@@ -12,6 +12,10 @@ class CreateNoteViewController: UIViewController {
 
     @IBOutlet weak var DataLabel: UILabel!
     @IBOutlet weak var noteText: UITextField!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let context = appDelegate.persistentContainer.viewContext
+    let entity = NSEntityDescription.entity(forEntityName: "Notes", in: context)
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,6 +28,10 @@ class CreateNoteViewController: UIViewController {
     }
     
     @IBAction func CreateNote(_ sender: Any) {
+            let newNote = NSManagedObject(entity: entity!, insertInto: context)
+            newNote.setValue(noteText.text!, forKey: "NoteText")
+            newNote.setValue(Date(), forKey: "NoteDate")
+            newNote.setValue(data, forKey: "NoteData")
     }
     
     
