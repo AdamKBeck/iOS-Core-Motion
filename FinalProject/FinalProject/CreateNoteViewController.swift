@@ -32,6 +32,12 @@ class CreateNoteViewController: UIViewController {
             newNote.setValue(noteText.text!, forKey: "NoteText")
             newNote.setValue(Date(), forKey: "NoteDate")
             newNote.setValue(data, forKey: "NoteData")
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed save")
+        }
     }
     
     
