@@ -10,7 +10,7 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-    <key>NSMotionUsageDescription</string>
+    <key>NSMotionUsageDescription</key>
     <string>Our application needs permission to use accelerometer data</string>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
