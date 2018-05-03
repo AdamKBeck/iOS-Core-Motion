@@ -10,4 +10,17 @@ import UIKit
 
 class Note {
 
+  public var NoteText = String()
+  public var NoteDate = Date()
+  public var NoteData = String()
+  
+  public init(){
+    
+  }
+  
+  public init(NoteText: String, NoteDate: Date, NoteData: String) {
+    self.NoteText = NoteText
+    self.NoteDate = NoteDate
+    self.NoteData = NoteData
+  }
 }
