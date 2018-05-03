@@ -12,9 +12,9 @@ import CoreData
 class NotesTableViewController: UITableViewController {
 
     
-    var notes = [Note]()
+    var notes = [NoteCell]()
     var noteCells = [NoteCell]()
-    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Notes")
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
     lazy var persistentContainer: NSPersistentContainer = {
         
         let container = NSPersistentContainer(name: "NoteData")
@@ -27,7 +27,7 @@ class NotesTableViewController: UITableViewController {
         return container
     }()
     lazy var context = persistentContainer.viewContext
-    lazy var entity = NSEntityDescription.entity(forEntityName: "Notes", in: context)
+    lazy var entity = NSEntityDescription.entity(forEntityName: "Note", in: context)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +36,7 @@ class NotesTableViewController: UITableViewController {
         do {
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject] {
-                notes.append(Note(NoteText: data.value(forKey: "noteText") as! String,
-                                  NoteDate: data.value(forKey: "noteDate") as! Date,
-                                  NoteData: data.value(forKey: "noteData") as! String))
+                notes.append(NoteCell(noteData: data.value(forKey: "noteData") as! String, noteText: data.value(forKey: "noteText") as! String, noteDate: data.value(forKey: "noteDate") as! Date, cell: UITableViewCell()))
             }
         } catch {
                 print("Failed")
@@ -64,19 +62,23 @@ class NotesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return notes.count
+        if(notes.count != 0){
+            return notes.count
+        }
+        else {
+            return noteCells.count
+        }
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        
-        var current : Note
+
         if(notes.count > 0) {
-            current = notes.removeFirst()
-            cell.textLabel?.text = current.NoteText
+            var current = notes.removeFirst()
+            cell.textLabel?.text = current.noteText
             
-            noteCells.append(NoteCell(note: current, cell: cell))
+            noteCells.append(NoteCell(noteData: current.noteData, noteText: current.noteText, noteDate: current.noteDate, cell: cell))
             
             return cell
         }
@@ -94,17 +96,34 @@ class NotesTableViewController: UITableViewController {
     }
     */
 
-    /*
+
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            let note = noteCells.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+            fetchRequest.predicate = NSPredicate.init(format: "noteDate == %@", note.noteDate as CVarArg)
+            do {
+                if let result = try? context.fetch(fetchRequest) {
+                    for object in result {
+                        context.delete(object)
+                        do {
+                         try context.save()
+                        } catch {
+                            print("unable to delete")
+                        }
+                    }
+                }
+            } 
+            
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
@@ -134,11 +153,15 @@ class NotesTableViewController: UITableViewController {
 }
         
 class NoteCell{
-    let note: Note
+    let noteData: String
+    let noteText: String
+    let noteDate: Date
     let cell: UITableViewCell
     
-    init(note: Note, cell: UITableViewCell){
-        self.note = note
+    init(noteData: String, noteText: String, noteDate: Date, cell: UITableViewCell){
+        self.noteData = noteData
+        self.noteDate = noteDate
+        self.noteText = noteText
         self.cell = cell
     }
 }

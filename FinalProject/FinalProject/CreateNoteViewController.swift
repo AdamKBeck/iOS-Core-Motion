@@ -27,7 +27,7 @@ class CreateNoteViewController: UIViewController {
         return container
     }()
     lazy var context = persistentContainer.viewContext
-    lazy var entity = NSEntityDescription.entity(forEntityName: "Notes", in: context)
+    lazy var entity = NSEntityDescription.entity(forEntityName: "Note", in: context)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ class CreateNoteViewController: UIViewController {
             let newNote = NSManagedObject(entity: entity!, insertInto: context)
             newNote.setValue(noteText.text!, forKey: "noteText")
             newNote.setValue(Date(), forKey: "noteDate")
-            newNote.setValue(DataLabel.text!, forKey: "noteData")
+            newNote.setValue(labelText, forKey: "noteData")
         
         do {
             try context.save()
