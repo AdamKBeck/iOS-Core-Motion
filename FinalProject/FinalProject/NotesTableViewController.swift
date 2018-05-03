@@ -10,9 +10,20 @@ import UIKit
 
 class NotesTableViewController: UITableViewController {
 
+    var notes = [Note]()
+    var noteCells = [NoteCell]()
+    let request = NSFetchRequest<NSFetchRequestResult>(entityName: "NotesTable")
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        request.returnsObjectsAsFaults = false
+        do {
+            let result = try context.fetch(request)
+            for data in result as! [NSManagedObject] {
+                notes.Append(Note(noteText: data.value(forKey: "NoteText") as! String, 
+                                  noteDate: data.value(forKey: "NoteDate") as! Date,
+                                  noteData: data.value(forKey: "NoteData") as! String))
+            }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,23 +40,32 @@ class NotesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return notes.count
     }
 
-    /*
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        
+        var current : Note
+        if(notes.count > 0) {
+            current = notes.removeFirst()
+            cell.textLabel?.text = current.NoteText
+            
+            noteCells.append(NoteCell(note: current, cell: cell))
+            
+            return cell
+        }
         // Configure the cell...
 
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.
@@ -92,4 +112,14 @@ class NotesTableViewController: UITableViewController {
     }
     */
 
+}
+        
+class NoteCell{
+    let note: Note
+    let cell: UITableViewCell
+    
+    init(note: Note, cell: UITableViewCell){
+        self.note = note
+        self.cell = cell
+    }
 }
