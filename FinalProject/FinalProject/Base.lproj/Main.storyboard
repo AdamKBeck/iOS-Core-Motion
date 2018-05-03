@@ -70,8 +70,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Height" id="aFH-ay-5JR"/>
                     <connections>
+                        <outlet property="beginButton" destination="NTg-Mc-pKG" id="IST-13-eNO"/>
                         <outlet property="createNote" destination="P0A-2p-Zad" id="7N1-zB-lxh"/>
+                        <outlet property="freezeButton" destination="9R1-Wx-48k" id="p1Y-5e-Xg6"/>
                         <outlet property="heightLabel" destination="6G0-JS-WYx" id="xHf-df-jHG"/>
+                        <outlet property="resetButton" destination="m7y-cb-rAC" id="a3c-gY-e8p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Flg-fd-WMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -395,6 +398,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZgW-To-2Fq"/>
+        <segue reference="VEr-G1-q1e"/>
     </inferredMetricsTieBreakers>
 </document>

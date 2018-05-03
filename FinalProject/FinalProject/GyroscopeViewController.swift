@@ -57,7 +57,7 @@ class GyroscopeViewController: UIViewController {
                     // atan2 of y and z measures traditional angles in a construction-sense.
                     var rotation = atan2(data.gravity.y, data.gravity.z) - Double.pi
                     
-                    // At this point, our data measures fro 0 to -6.2, radians.
+                    // At this point, our data measures from 0 to -6.2, radians.
                     // Convert this to degrees
                     rotation = rotation * (180 / Double.pi)
                     
