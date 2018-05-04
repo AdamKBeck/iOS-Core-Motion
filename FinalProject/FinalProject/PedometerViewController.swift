@@ -51,6 +51,7 @@ class PedometerViewController: UIViewController {
         createNote.isHidden = true
         distanceTraveled.isHidden = true
         
+        startButton.isEnabled = true
         endButton.isEnabled = false
     }
 

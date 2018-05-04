@@ -20,6 +20,7 @@ class AltitudeViewController: UIViewController {
     @IBOutlet weak var beginButton: UIButton!
     @IBOutlet weak var freezeButton: UIButton!
     @IBOutlet weak var resetButton: UIButton!
+    @IBOutlet weak var metersSwitch: UISwitch!
     
     // Labels
     @IBOutlet weak var heightLabel: UILabel!
@@ -67,8 +68,18 @@ class AltitudeViewController: UIViewController {
     @IBAction func FreezeData(_ sender: Any) {
         endDistance = currentAltitude
         let distance = endDistance - startDistance
+        
+        
         let stringDistance = String(distance).prefix(5)
-        heightLabel.text = "Height from Zero Point: " + stringDistance + " meters."
+        
+        if (metersSwitch.isOn) {
+            heightLabel.text = "Height from Zero Point: " + stringDistance + " meters."
+        }
+        else {
+            let feet = distance * 3.28084
+            
+            heightLabel.text = "Height from Zero Point: " + String(feet).prefix(5) + " feet."
+        }
         createNote.isHidden = false
         freezeButton.isEnabled = false
     }

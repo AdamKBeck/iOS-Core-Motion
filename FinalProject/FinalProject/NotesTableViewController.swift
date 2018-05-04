@@ -152,7 +152,7 @@ class NotesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        var dest = segue.destination as! IndividualNoteViewController
+        let dest = segue.destination as! IndividualNoteViewController
         
         if(sender is UITableViewCell){
             for cell in noteCells{
