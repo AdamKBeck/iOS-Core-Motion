@@ -194,6 +194,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Speed (always on):" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rej-FU-VCT">
+                                <rect key="frame" x="16" y="216" width="208" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5VF-8S-BxY">
+                                <rect key="frame" x="236" y="216" width="123" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="do5-U2-C91"/>
@@ -203,6 +217,7 @@
                         <outlet property="createNote" destination="hwF-fL-oOW" id="bGI-an-XeN"/>
                         <outlet property="distanceTraveled" destination="LYO-QU-sUz" id="ypI-4E-4XX"/>
                         <outlet property="endButton" destination="hZF-eQ-bOy" id="57y-tD-v6C"/>
+                        <outlet property="speedLabel" destination="5VF-8S-BxY" id="Yzy-Lo-ppr"/>
                         <outlet property="startButton" destination="aG8-Uq-vN5" id="Mzl-X2-PR4"/>
                         <outlet property="zeroButton" destination="vrX-sD-h5L" id="ojY-hr-CQL"/>
                     </connections>

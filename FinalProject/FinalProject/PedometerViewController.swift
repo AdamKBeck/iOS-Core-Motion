@@ -16,6 +16,7 @@ class PedometerViewController: UIViewController {
     
     // Labels
     @IBOutlet weak var distanceTraveled: UILabel!
+    @IBOutlet weak var speedLabel: UILabel!
     
     // Buttons
     @IBOutlet weak var createNote: UIButton!
@@ -27,18 +28,15 @@ class PedometerViewController: UIViewController {
     var startDistance: Double! = 0.0
     var endDistance: Double! = 0.0
     var distance: Double! = 0.0
+    var speed: Double! = 0.0
     
     // Timers
     var timer = Timer()
     var timerInterval = 1.0
     var timeElapsed:TimeInterval = 1.0
     
-    func displayPedometerData() {
-        // empty
-    }
-    
     @objc func timerAction(timer:Timer){
-        displayPedometerData()
+        // pass
     }
     
     // Functions
@@ -72,7 +70,12 @@ class PedometerViewController: UIViewController {
         pedometer.startUpdates(from: Date(), withHandler: { (pedometerData, error) in
             if let pedData = pedometerData{
                 if let dist = pedData.distance{
-                    self.distance = Double(truncating: dist)
+                    self.distance = dist as! Double
+                }
+                if let pace = pedData.currentPace {
+                    self.speed = pace as! Double
+                    self.speedLabel.text = String(self.speed)
+                    
                 }
             }
         })
