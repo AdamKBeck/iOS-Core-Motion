@@ -138,7 +138,7 @@ class GyroscopeViewController: UIViewController {
         let dest = segue.destination as! CreateNoteViewController
         
         dest.identifier = "angles"
-        dest.labelText = "This is my angle data!"
+        dest.labelText = "Angle Measured: " + angleXLabel.text!
      }
 
 }

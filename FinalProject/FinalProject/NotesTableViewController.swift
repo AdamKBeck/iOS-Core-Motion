@@ -36,7 +36,7 @@ class NotesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        noteCells = [NoteCell]()
         request.returnsObjectsAsFaults = false
         do {
             let result = try context.fetch(request)
