@@ -13,6 +13,7 @@ class PedometerViewController: UIViewController {
     let pedometerData = CMPedometerData()
     let activityManager = CMMotionActivityManager()
     var today = Date()
+    var stringDistance = String()
     
     // Labels
     @IBOutlet weak var distanceTraveled: UILabel!
@@ -108,7 +109,7 @@ class PedometerViewController: UIViewController {
     @IBAction func freezeDistance(_ sender: Any) {
         endDistance = self.distance
         let distance = endDistance - startDistance
-        let stringDistance = String(distance).prefix(5)
+        stringDistance = String(String(distance).prefix(5))
         self.distanceTraveled.text = "Distance Traveled: "  + stringDistance + " meters."
         createNote.isHidden = false
         
@@ -126,7 +127,7 @@ class PedometerViewController: UIViewController {
         let dest = segue.destination as! CreateNoteViewController
         
         dest.identifier = "distance"
-        dest.labelText = "This is my distance data!"
+        dest.labelText = "Distance Traveled: " + stringDistance + " meters."
         
      }
 

@@ -29,6 +29,7 @@ class AltitudeViewController: UIViewController {
     var startDistance = 0.0
     var endDistance = 0.0
     var currentAltitude = 0.0
+    var stringDistance = String()
     
     
     // Functions
@@ -68,8 +69,6 @@ class AltitudeViewController: UIViewController {
     @IBAction func FreezeData(_ sender: Any) {
         endDistance = currentAltitude
         let distance = endDistance - startDistance
-        
-        
         let stringDistance = String(distance).prefix(5)
         
         if (metersSwitch.isOn) {
@@ -100,7 +99,7 @@ class AltitudeViewController: UIViewController {
         let dest = segue.destination as! CreateNoteViewController
         
         dest.identifier = "altitude"
-        dest.labelText = "This is my altitude data!"
+        dest.labelText = "Height from Zero Point: " + stringDistance + " meters."
     }
 
 
